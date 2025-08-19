@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import { NavLink } from "@/hooks/NavLink";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,8 +16,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body>
+        <header>
+          <nav style={{ padding: "10px 0", borderBottom: "1px solid #ccc" }}>
+            <ul style={{ listStyle: "none", display: "flex", gap: 20 }}>
+              <li><NavLink href={"/"}>Home</NavLink></li>
+              <li><NavLink href={"/about"}>About</NavLink></li>
+              <li><NavLink href={"/posts"}>Posts</NavLink></li>
+              <li><NavLink href="/new-post">New Post</NavLink></li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
