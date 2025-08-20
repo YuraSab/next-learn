@@ -1,22 +1,16 @@
+// src/app/posts/page.tsx
+import { Post } from "@/types";
 import Link from "next/link";
-import { Post } from "@/actions/posts";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-
-async function getData() {
-    // const res = await fetch('http://localhost:3000/api/posts');
-    const res = await fetch(`${API_URL}/api/posts`, { cache: 'no-store' });
-
-    if (!res.ok) {
-        // Обробка помилок
-        throw new Error('Failed to fetch data');
-    }
-    
-    return res.json();
-}
+import { getPosts } from "@/actions/posts"; // Імпортуємо нашу функцію
 
 export default async function PostsPage() {
-    const posts: Post[] = await getData();
+    const response = await getPosts(); // Викликаємо Server Action
+
+    if (!response.success) {
+        return <main>Помилка: {response.error}</main>;
+    }
+
+    const posts = response.posts;
     
     return (
     <main>
@@ -26,10 +20,10 @@ export default async function PostsPage() {
           {posts.map((post: Post) => (
             <li key={post.id}>
               <h2>
-                {/* Тут ми будемо посилатися на сторінку окремого поста */}
                 <Link href={`/posts/${post.id}`}>{post.title}</Link>
               </h2>
-              <p>{post.date}</p>
+              {/* Тут ми будемо використовувати дату, яку отримали */}
+              <p>{new Date(post.createdAt).toLocaleDateString()}</p>
             </li>
           ))}
         </ul>

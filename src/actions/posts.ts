@@ -75,8 +75,7 @@ export async function getPosts(): Promise<PostsSuccessResult | ErrorResult> {
                 id: doc.id,
                 title: data.title,
                 content: data.content,
-                // Перетворюємо об'єкт Firebase.Timestamp на ISO-рядок
-                createdAt: data.createdAt.toDate().toISOString(),
+                createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString(),
             };
         });
   
@@ -103,8 +102,7 @@ export async function getPost(postId: string): Promise<PostSuccessResult | Error
             id: docSnap.id,
             title: data.title,
             content: data.content,
-            // Перетворюємо об'єкт Firebase.Timestamp на ISO-рядок
-            createdAt: data.createdAt.toDate().toISOString(),
+            createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString(),
         };
   
         return { success: true, post: post as Post };

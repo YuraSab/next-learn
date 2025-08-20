@@ -1,15 +1,11 @@
 
 
-// src/app/posts/[postId]/page.tsx
-// НЕМАЄ "use client" тут
-
 import { Metadata } from "next";
-import { collection, doc, getDoc, getDocs, serverTimestamp } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { DeletePostButton } from "@/components/DeletePostButton";
 import Link from "next/link";
-import { getPost, Post, FetchedPost } from '@/lib/data';
-
+import { getPost } from "@/actions/posts";
 
 interface Props {
     params: {
@@ -24,36 +20,35 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const post: FetchedPost | null = await getPost(params.postId);
+    const response = await getPost(params.postId);
   
-    if (!post) {
-      return { title: 'Post Not Found' };
-    }
+    if (!response.success)
+        return { title: 'Post Not Found' };
+
     return {
-      title: post.title,
-      description: `Read about ${post.title}`,
+        title: response.post.title,
+        description: `Read about ${response.post.title}`,
     };
 }
 
 export default async function PostDetail({ params }: Props) {
-    const post: FetchedPost | null = await getPost(params.postId);
+    const response = await getPost(params.postId);
 
-    if (!post) {
-      return <div>Post not found!</div>;
-    }
+    if (!response.success)
+        return <div>Post not found!</div>;
+    
     return (
       <main>
-        <h1>{post.title}</h1>
-        {/* @ts-ignore */}
-        <p>Published on: {new Date(post.createdAt.seconds * 1000).toLocaleDateString()}</p>
+        <h1>{response.post.title}</h1>
+        <p>Published on: {new Date(response.post.createdAt).toLocaleDateString()}</p>
         <hr />
-        <article>{post.content}</article>
-        <Link href={`/edit-post/${post.id}`}>
+        <article>{response.post.content}</article>
+        <Link href={`/edit-post/${response.post.id}`}>
             <button style={{ padding: '10px', cursor: 'pointer', backgroundColor: 'blue', color: 'white', border: 'none' }}>
-              Edit Post
+                Edit Post
             </button>
         </Link>
-        <DeletePostButton postId={post.id}/>
+        <DeletePostButton postId={response.post.id}/>
       </main>
     );
 }
