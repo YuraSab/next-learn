@@ -23,7 +23,7 @@ export default function RootLayout({
               <li><NavLink href={"/"}>Home</NavLink></li>
               <li><NavLink href={"/about"}>About</NavLink></li>
               <li><NavLink href={"/posts"}>Posts</NavLink></li>
-              <li><NavLink href="/new-post">New Post</NavLink></li>
+              <li><NavLink href="/create-post">New Post</NavLink></li>
             </ul>
           </nav>
         </header>

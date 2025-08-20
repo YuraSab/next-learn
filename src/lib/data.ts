@@ -1,4 +1,3 @@
-// src/lib/data.ts
 import { doc, getDoc, serverTimestamp, collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase";
 

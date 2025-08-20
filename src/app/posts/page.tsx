@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Post } from "@/lib/posts";
+import { Post } from "@/actions/posts";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 

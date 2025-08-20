@@ -1,7 +1,5 @@
-// src/app/edit-post/[postId]/page.tsx
-// Немає "use client" тут
-
-import EditForm from "./EditForm";
+import { getPost } from "@/actions/posts";
+import PostForm from "@/components/PostForm";
 
 interface Props {
     params: {
@@ -9,6 +7,16 @@ interface Props {
     };
 }
 
-export default function EditPostPage({ params }: Props) {
-    return <EditForm postId={params.postId} />;
+export default async function EditPostPage({ params }: Props) {
+    const { postId } = params;
+    const result = await getPost(postId); // Завантажуємо дані на сервері
+
+    if (!result.success || !result.post)
+        return <div style={{ textAlign: 'center', fontSize: '1.25rem', marginTop: '2.5rem' }}>Пост не знайдено.</div>;
+
+    return (
+        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem' }}>
+            <PostForm initialProps={result.post} />
+        </div>
+    )
 }

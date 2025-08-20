@@ -2,7 +2,7 @@
 'use client';
 
 import { useRouter } from "next/navigation"; // Correct import for App Router
-import { deletePost } from "../../server-actions/posts";
+import { deletePost } from "../actions/posts";
 
 export const DeletePostButton = ({ postId }: { postId: string }) => {
     const router = useRouter();
