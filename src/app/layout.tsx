@@ -32,7 +32,7 @@ export default function RootLayout({
               <li><NavLink href="/create-post">New Post</NavLink></li>
               <li><NavLink href="/dashboard">Dashboard</NavLink></li>
               <li><NavLink href="/sceleton-list">Sceleton</NavLink></li>
-
+              <li><NavLink href="/infinite-scroll">Infinite</NavLink></li>
             </ul>
           </nav>
         </header>
