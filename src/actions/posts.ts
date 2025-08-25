@@ -1,4 +1,3 @@
-// src/actions/posts.ts
 'use server';
 
 import { db } from "@/config/firebase";
@@ -17,38 +16,6 @@ import {
 } from "firebase/firestore";
 import { revalidatePath } from "next/cache";
 import { Post } from "@/types";
-
-
-// Набір результатів
-// export type PostSuccessResult = {
-//     success: true;
-//     post: Post;
-// }
-// export type PostsSuccessResult = {
-//     success: true;
-//     posts: Post[];
-// }
-// export type PostIdSuccessResult = {
-//     success: true;
-//     id: string;
-// }
-// export type SimpleSuccessResult = {
-//     success: true;
-// };
-// export type ErrorResult = {
-//     success: false;
-//     error: string;
-// };
-
-// // ----------------------
-// // Оновлені типи для результатів
-// // ----------------------
-// export type GetPostPromise = Promise<PostSuccessResult | ErrorResult>;
-// export type GetPostsPromise = Promise<PostsSuccessResult | ErrorResult>;
-// export type CreatePostPromise = Promise<PostIdSuccessResult | ErrorResult>;
-// export type PostUpdatePromise = Promise<SimpleSuccessResult | ErrorResult>;
-// export type PostDeletePromise = Promise<SimpleSuccessResult | ErrorResult>;
-
 
 
 // Типи для результатів операцій

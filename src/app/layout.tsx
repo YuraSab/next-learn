@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
 import { NavLink } from "@/hooks/NavLink";
+import { AuthProvider } from "@/components/AuthContext";
+import AuthButtons from "@/components/AuthButtons";
+import UserStatus from "@/components/UserStatus";
 
 
 export const metadata: Metadata = {
@@ -17,8 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <AuthProvider>
         <header>
           <nav style={{ padding: "10px 0", borderBottom: "1px solid #ccc" }}>
+              <UserStatus/>
+              <AuthButtons />
             <ul style={{ listStyle: "none", display: "flex", gap: 20 }}>
               <li><NavLink href={"/"}>Home</NavLink></li>
               <li><NavLink href={"/about"}>About</NavLink></li>
@@ -30,6 +36,7 @@ export default function RootLayout({
         <main>
           {children}
         </main>
+        </AuthProvider>
       </body>
     </html>
   );
