@@ -30,6 +30,7 @@ export default function RootLayout({
               <li><NavLink href={"/about"}>About</NavLink></li>
               <li><NavLink href={"/posts"}>Posts</NavLink></li>
               <li><NavLink href="/create-post">New Post</NavLink></li>
+              <li><NavLink href="/dashboard">Dashboard</NavLink></li>
             </ul>
           </nav>
         </header>
