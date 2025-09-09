@@ -1,0 +1,5 @@
+After cloning:
+
+1. Add private/service-account.json
+
+2. Add .env.local
